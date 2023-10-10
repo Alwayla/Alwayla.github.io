@@ -192,3 +192,4 @@ animation:
 
 dark_mode:
   enable: false
+​post_asset_folder: true
