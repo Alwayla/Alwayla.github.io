@@ -75,7 +75,7 @@ mermaid: ## mermaid url https://github.com/knsv/mermaid
 # version 1.5.1
 # notify and verify have been deprecated
 valine:
-  enable: true # if you want to use valine,please set this value is true
+  enable: false # if you want to use valine,please set this value is true
   appId:  # leancloud application app id
   appKey:  # leancloud application app key
   pageSize: 10 # comment list page size
@@ -118,11 +118,11 @@ twikoo:
 # https://github.com/gitalk/gitalk/blob/master/readme-cn.md
 gitalk:
   enable: false
-  clientID:
-  clientSecret:
-  repo:
-  owner:
-  admin:
+  clientID: 
+  clientSecret: 
+  repo: 
+  owner: 
+  admin: 
 
 # https://giscus.app/zh-CN
 giscus:
