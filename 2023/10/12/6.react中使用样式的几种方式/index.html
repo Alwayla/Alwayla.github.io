@@ -1,0 +1,568 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-CN"
+            
+          
+    >
+    <head>
+    <meta charset="utf-8">
+    
+
+    
+
+    
+    <title>
+        React中使用样式的几种方式 |
+        
+        Alwayla</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CUbuntu%20Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+    
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/v4-font-face.min.css">
+
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+    <meta name="description" content="1.使用常规方式  使用less|sass|css 文件引入使用 问题: 后面的样式会覆盖前面的样式 会造成样式污染   2.将样式文件以module.less结尾  使用: 文件名.module.less 使用时webpack会处理  使用代码  公共样式common.module.css123.hoverColor:hover &amp;#123;    color: red;&amp;#125;    Na">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React中使用样式的几种方式">
+<meta property="og:url" content="https://alwayla.github.io/2023/10/12/6.react%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%A0%B7%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Alwayla">
+<meta property="og:description" content="1.使用常规方式  使用less|sass|css 文件引入使用 问题: 后面的样式会覆盖前面的样式 会造成样式污染   2.将样式文件以module.less结尾  使用: 文件名.module.less 使用时webpack会处理  使用代码  公共样式common.module.css123.hoverColor:hover &amp;#123;    color: red;&amp;#125;    Na">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alwayla.github.io/imgs/blog1/image.png">
+<meta property="article:published_time" content="2023-10-12T03:57:57.043Z">
+<meta property="article:modified_time" content="2023-10-12T03:48:37.121Z">
+<meta property="article:author" content="Alwayla">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alwayla.github.io/imgs/blog1/image.png">
+    
+        <link rel="alternate" href="/atom.xml" title="Alwayla" type="application/atom+xml">
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/typeface-source-code-pro@1.1.13/index.css">
+
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+    
+    
+    
+    
+    
+<script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script>
+
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/wowjs@1.1.3/css/libs/animate.css">
+
+        
+<script src="https://unpkg.com/wowjs@1.1.3/dist/wow.min.js"></script>
+
+        <script>
+          new WOW({
+            offset: 0,
+            mobile: true,
+            live: false
+          }).init();
+        </script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+    
+<div id='loader'>
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="loading-taichi">
+      <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+      <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff6e6b" />
+      <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z" fill="#fd0d00" />
+      <path d="M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95" fill="#fd0d00" />
+    </svg>
+    </div>
+    <div class="loading-word">命运齿轮转动中...</div>
+  </div>
+</div>
+</div>
+
+<script>
+  const endLoading = function() {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loader').classList.add("loading");
+  }
+  window.addEventListener('load', endLoading);
+  document.getElementById('loader').addEventListener('click', endLoading);
+</script>
+
+
+    <div id="container">
+        <div id="wrap">
+            <header id="header">
+    
+        <img data-src="/images/banner.jpg" data-sizes="auto" alt="React中使用样式的几种方式" class="lazyload">
+    
+    <div id="header-outer" class="outer">
+        <div id="header-title" class="inner">
+            <div id="logo-wrap">
+                
+                    
+                    
+                        <a href="/" id="logo"><h1>React中使用样式的几种方式</h1></a>
+                    
+                
+            </div>
+            
+                
+                
+            
+        </div>
+        <div id="header-inner">
+            <nav id="main-nav">
+                <a id="main-nav-toggle" class="nav-icon"></a>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/">首页</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/archives">归档</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/about">关于</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/friend">友链</a>
+                    </span>
+                
+            </nav>
+            <nav id="sub-nav">
+                
+                    <a id="nav-rss-link" class="nav-icon" href="/atom.xml"
+                       title="RSS 订阅"></a>
+                
+                
+            </nav>
+            <div id="search-form-wrap">
+                <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://Alwayla.github.io"></form>
+            </div>
+        </div>
+    </div>
+</header>
+
+            <div id="content" class="outer">
+                <section id="main"><article id="post-6.react中使用样式的几种方式" class="h-entry article article-type-post"
+         itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <div class="article-inner">
+        <div class="article-meta">
+            <div class="article-date wow slideInLeft">
+    <a href="/2023/10/12/6.react%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%A0%B7%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="article-date-link">
+        <time datetime="2023-10-12T03:57:57.043Z"
+              itemprop="datePublished">2023-10-12</time>
+    </a>
+</div>
+
+            
+    <div class="article-category wow slideInLeft">
+        <a class="article-category-link" href="/categories/React/">React</a><a class="article-category-link" href="/categories/React/React%E5%9F%BA%E7%A1%80/">React基础</a><a class="article-category-link" href="/categories/React/React%E5%9F%BA%E7%A1%80/%E6%A0%B7%E5%BC%8F%E4%BD%BF%E7%94%A8/">样式使用</a>
+    </div>
+
+
+        </div>
+        <div class="hr-line"></div>
+        
+
+        <div class="e-content article-entry" itemprop="articleBody">
+            
+                <p><strong>1.使用常规方式</strong></p>
+<ul>
+<li>使用less|sass|css 文件引入使用</li>
+<li>问题: 后面的样式会覆盖前面的样式 会造成样式污染</li>
+</ul>
+<p> <strong>2.将样式文件以module.less结尾</strong></p>
+<ul>
+<li>使用: 文件名.module.less 使用时webpack会处理<br> <img src="/imgs/blog1/image.png" alt="image.png"></li>
+<li>使用代码</li>
+<li><ul>
+<li>公共样式common.module.css<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.hoverColor:hover &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><ul>
+<li>Nav.jsx<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import React from <span class="string">&quot;react&quot;</span>;</span><br><span class="line">import sty from <span class="string">&#x27;./Nav.module.css&#x27;</span>;</span><br><span class="line">import common from <span class="string">&#x27;./common.module.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line">const Nav = <span class="keyword">function</span> <span class="function"><span class="title">Nav</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> &lt;nav className=&#123;sty.box&#125;&gt;</span><br><span class="line">        &lt;h2 className=&#123;`<span class="variable">$&#123;sty.title&#125;</span> <span class="variable">$&#123;common.hoverColor&#125;</span>`&#125;&gt;购物商城&lt;/h2&gt;</span><br><span class="line">        &lt;div className=&#123;sty.list&#125;&gt;</span><br><span class="line">            &lt;a href=<span class="string">&quot;&quot;</span>&gt;首页&lt;/a&gt;</span><br><span class="line">            &lt;a href=<span class="string">&quot;&quot;</span>&gt;秒杀&lt;/a&gt;</span><br><span class="line">            &lt;a href=<span class="string">&quot;&quot;</span>&gt;我的&lt;/a&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;span className=&#123;sty.link&#125;&gt;&lt;/span&gt;</span><br><span class="line">    &lt;/nav&gt;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default Nav;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><ul>
+<li>Nav.module.css<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">    background: lightblue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box .title &#123;</span><br><span class="line">    font-size: 20px;</span><br><span class="line">    color: lightcoral;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.list &#123;</span><br><span class="line">    font-size: 14px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.list a &#123;</span><br><span class="line">    color: #000;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.list a:hover &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.link &#123;</span><br><span class="line">    composes: list; //使用其他地方的样式</span><br><span class="line">    color: lightcoral;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">:global(.clearfix) &#123;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <strong>3.使用第三方的依赖react.jss</strong></li>
+</ul>
+</li>
+<li>使用 下载:yarn add react.jss </li>
+<li>相对于CSSModules的好处：因为样式是写在JS中的，我们就可以基于一些逻辑操作，实现样式的动态化管理！！</li>
+<li>代码中使用</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">//import react from <span class="string">&quot;react&quot;</span></span><br><span class="line">import &#123;createUseStyles&#125; from <span class="string">&quot;react-jss&quot;</span></span><br><span class="line"></span><br><span class="line">const usestyles = createUseStyles(&#123;</span><br><span class="line">    box:&#123;</span><br><span class="line">        color:<span class="string">&#x27;red&#x27;</span>,</span><br><span class="line">        backfround:<span class="string">&#x27;#ff6700&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    title:&#123;</span><br><span class="line">        color:props=&gt;props.color,</span><br><span class="line">        fontSize:props=&gt;props.size</span><br><span class="line">    &#125;,</span><br><span class="line">    list:props=&gt;&#123;</span><br><span class="line">        <span class="built_in">return</span> &#123;</span><br><span class="line">            marginTop:<span class="string">&quot;20px&quot;</span>,</span><br><span class="line">           <span class="string">&#x27;&amp; span&#x27;</span>:&#123;</span><br><span class="line">               fontSize:props=&gt;props.size+<span class="string">&#x27;px&#x27;</span>,</span><br><span class="line">                color:<span class="string">&#x27;#ff6700&#x27;</span>,</span><br><span class="line">                padding:<span class="string">&quot;10px&quot;</span>,</span><br><span class="line">                border:<span class="string">&#x27;1px solid #ccc&#x27;</span>,</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">const Demo = <span class="keyword">function</span> <span class="function"><span class="title">Demo</span></span>()&#123;</span><br><span class="line">    <span class="built_in">let</span> &#123;box,title,list&#125; = usestyles(&#123;</span><br><span class="line">        size:16,</span><br><span class="line">        color:<span class="string">&quot;orange&quot;</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">return</span> &lt;&gt;</span><br><span class="line">      &lt;div className=&#123;box&#125;&gt;react&lt;/div&gt;</span><br><span class="line">      &lt;h1 className=&#123;title&#125;&gt;ces&lt;/h1&gt;</span><br><span class="line">      &lt;div className=&#123;list&#125;&gt;</span><br><span class="line">          &lt;span&gt;你好&lt;/span&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default Demo</span><br></pre></td></tr></table></figure>
+
+<p><strong>4.使用第三方依赖styled-components</strong></p>
+<ul>
+<li>下载 yarn add styled-components</li>
+<li><ul>
+<li><strong>使用</strong></li>
+</ul>
+</li>
+<li><ul>
+<li>公共样式 common.js<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import styled from <span class="string">&quot;styled-components&quot;</span>;</span><br><span class="line"></span><br><span class="line">/* 编写一些通用的样式 */</span><br><span class="line"><span class="built_in">export</span> const colorRed = <span class="string">&quot;#ff4d4f&quot;</span>;</span><br><span class="line"><span class="built_in">export</span> const colorBlue = <span class="string">&quot;#1677ff&quot;</span>;</span><br><span class="line"><span class="built_in">export</span> const titleSize = <span class="string">&quot;18px&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> const CommonListBox = styled.ul`</span><br><span class="line">    box-sizing: border-box;</span><br><span class="line">    padding: 10px;</span><br><span class="line">    border: 1px solid <span class="comment">#999;</span></span><br><span class="line"></span><br><span class="line">    li&#123;</span><br><span class="line">        font-size: 14px;</span><br><span class="line">        line-height: 30px;</span><br><span class="line">        overflow: hidden;</span><br><span class="line">        white-space: nowrap;</span><br><span class="line">        text-overflow: ellipsis;</span><br><span class="line">        &amp;:hover&#123;</span><br><span class="line">            color: <span class="variable">$&#123;colorRed&#125;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">`;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><ul>
+<li>使用页面<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import React from <span class="string">&quot;react&quot;</span>;</span><br><span class="line">import styled from <span class="string">&quot;styled-components&quot;</span>;</span><br><span class="line">import &#123; CommonListBox, titleSize, colorRed &#125; from <span class="string">&#x27;./common&#x27;</span>;</span><br><span class="line">/* 编写组件的样式：基于CSS-IN-JS思想中的styled-components插件 */</span><br><span class="line">const MenuBox = styled.div`</span><br><span class="line">    background-color: lightpink;</span><br><span class="line">    width: 400px;</span><br><span class="line"></span><br><span class="line">    .title&#123;</span><br><span class="line">        font-size: <span class="variable">$&#123;titleSize&#125;</span>px;</span><br><span class="line">        line-height: 40px;</span><br><span class="line"></span><br><span class="line">        &amp;:hover&#123;</span><br><span class="line">            color: <span class="variable">$&#123;colorRed&#125;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    li&#123;</span><br><span class="line">        font-size: 16px !important;</span><br><span class="line">    &#125;</span><br><span class="line">`;</span><br><span class="line"></span><br><span class="line">class Menu extends React.Component &#123;</span><br><span class="line">    <span class="function"><span class="title">render</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> &lt;MenuBox&gt;</span><br><span class="line">            &lt;h2 className=<span class="string">&quot;title&quot;</span>&gt;产品分类列表&lt;/h2&gt;</span><br><span class="line">            &lt;CommonListBox&gt;</span><br><span class="line">                &lt;li&gt;手机&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;电脑&lt;/li&gt;</span><br><span class="line">                &lt;li&gt;家电&lt;/li&gt;</span><br><span class="line">            &lt;/CommonListBox&gt;</span><br><span class="line">        &lt;/MenuBox&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default Menu;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><strong>进阶使用</strong></li>
+<li><ul>
+<li>Nav.jsx页面<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import React from <span class="string">&quot;react&quot;</span>;</span><br><span class="line">import &#123; NavBox, NavBarBox &#125; from <span class="string">&#x27;./NavStyle&#x27;</span>;</span><br><span class="line"></span><br><span class="line">const Nav = <span class="keyword">function</span> <span class="function"><span class="title">Nav</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> &lt;NavBox&gt;</span><br><span class="line">        &lt;h2 className=<span class="string">&quot;title&quot;</span>&gt;购物商城&lt;/h2&gt;</span><br><span class="line">        &lt;NavBarBox hover=<span class="string">&quot;#ffe58f&quot;</span> size=&#123;10&#125;&gt;</span><br><span class="line">            &lt;a href=<span class="string">&quot;/home&quot;</span>&gt;首页&lt;/a&gt;</span><br><span class="line">            &lt;a href=<span class="string">&quot;/rush&quot;</span>&gt;秒杀&lt;/a&gt;</span><br><span class="line">            &lt;a href=<span class="string">&quot;/my&quot;</span>&gt;我的&lt;/a&gt;</span><br><span class="line">        &lt;/NavBarBox&gt;</span><br><span class="line">    &lt;/NavBox&gt;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default Nav;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><ul>
+<li>NavStyle.js样式<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import styled from <span class="string">&quot;styled-components&quot;</span>;</span><br><span class="line">import &#123; colorRed, colorBlue, titleSize &#125; from <span class="string">&#x27;./common&#x27;</span>;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> 基于 “styled.标签名” 这种方式编写需要的样式</span><br><span class="line">   + 样式要写在“ES6模板字符串”中</span><br><span class="line">   + 返回并且导出的结果是一个自定义组件</span><br><span class="line"></span><br><span class="line"> 如果编写样式的时候没有提示，我们可以在vscode中安装一个官方插件：vscode-styled-components</span><br><span class="line"> */</span><br><span class="line"><span class="built_in">export</span> const NavBox = styled.nav`</span><br><span class="line">    background-color: lightblue;</span><br><span class="line">    width: 300px;</span><br><span class="line"></span><br><span class="line">    .title&#123;</span><br><span class="line">        font-size: <span class="variable">$&#123;titleSize&#125;</span>;</span><br><span class="line">        color: <span class="variable">$&#123;colorRed&#125;</span>;</span><br><span class="line">        line-height: 40px;</span><br><span class="line"></span><br><span class="line">        &amp;:hover&#123;</span><br><span class="line">            color: <span class="variable">$&#123;colorBlue&#125;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">`;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> const NavBarBox = styled.div.attrs(props =&gt; &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        size: props.size || 16</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)`</span><br><span class="line">    line-height: 40px;</span><br><span class="line"></span><br><span class="line">    a&#123;</span><br><span class="line">        font-size: <span class="variable">$&#123;props =&gt; props.size&#125;</span>px;</span><br><span class="line">        color: <span class="comment">#000;</span></span><br><span class="line">        margin-right: 10px;</span><br><span class="line"></span><br><span class="line">        &amp;:hover&#123;</span><br><span class="line">            color: <span class="variable">$&#123;props =&gt; props.hover&#125;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">`;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="https://alwayla.github.io/2023/10/12/6.react%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%A0%B7%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" data-id="clnmtixmj000d7kn712gta4sg" data-title="React中使用样式的几种方式"
+               class="article-share-link">分享</a>
+            
+            
+            
+            
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+
+
+        </footer>
+    </div>
+    
+        
+    <nav id="article-nav" class="wow fadeInUp">
+        
+            <div class="article-nav-link-wrap article-nav-link-left">
+                
+                    
+                    
+                        <img data-src="/covers/y2.jpg" data-sizes="auto" alt="React中基于上下文方案实现祖先和后代的通信" class="lazyload">
+                    
+                
+                <a href="/2023/10/12/5.%E5%9F%BA%E4%BA%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E6%96%B9%E6%A1%88%E5%AE%9E%E7%8E%B0%E7%A5%96%E5%85%88%E5%92%8C%E5%90%8E%E4%BB%A3%E7%9A%84%E9%80%9A%E4%BF%A1%E3%80%8C%E7%B1%BB%E7%BB%84%E4%BB%B6%E3%80%8D%E5%92%8C%E3%80%8C%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E3%80%8D/"></a>
+                <div class="article-nav-caption">前一篇</div>
+                <h3 class="article-nav-title">
+                    
+                        React中基于上下文方案实现祖先和后代的通信
+                    
+                </h3>
+            </div>
+        
+        
+            <div class="article-nav-link-wrap article-nav-link-right">
+                
+                    
+                    
+                        <img data-src="/covers/aql.jpg" data-sizes="auto" alt="nvm的使用" class="lazyload">
+                    
+                
+                <a href="/2023/10/12/1.nvm%E7%9A%84%E4%BD%BF%E7%94%A8/"></a>
+                <div class="article-nav-caption">后一篇</div>
+                <h3 class="article-nav-title">
+                    
+                        nvm的使用
+                    
+                </h3>
+            </div>
+        
+    </nav>
+
+
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
+</section>
+                
+                    <aside id="sidebar">
+    <div class="sidebar-wrap wow fadeInRight">
+        <div class="sidebar-author">
+            <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="Alwayla" class="lazyload">
+            <div class="sidebar-author-name">Alwayla</div>
+            <div class="sidebar-description">万物皆变,唯变不变</div>
+        </div>
+        <div class="sidebar-state">
+            <div class="sidebar-state-article">
+                <div>文章</div>
+                <div class="sidebar-state-number">7</div>
+            </div>
+            <div class="sidebar-state-category">
+                <div>分类</div>
+                <div class="sidebar-state-number">11</div>
+            </div>
+            <div class="sidebar-state-tag">
+                <div>标签</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+        </div>
+        <div class="sidebar-social">
+            
+                <div class=icon-github>
+                    <a href=https://github.com/Alwayla itemprop="url" target="_blank"></a>
+                </div>
+            
+        </div>
+        <div class="sidebar-menu">
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">首页</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/archives"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">归档</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/about"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">关于</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/friend"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">友链</div>
+                </div>
+            
+        </div>
+    </div>
+    
+        
+    <div class="widget-wrap wow fadeInRight">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E5%9F%BA%E7%A1%80/">React基础</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E5%9F%BA%E7%A1%80/ref%E5%92%8CuseImperativeHandle/">ref和useImperativeHandle</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E5%9F%BA%E7%A1%80/%E4%B8%8A%E4%B8%8B%E6%96%87%E9%80%9A%E8%AE%AF/">上下文通讯</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E5%9F%BA%E7%A1%80/%E4%BB%A3%E7%90%86/">代理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E5%9F%BA%E7%A1%80/%E6%A0%B7%E5%BC%8F%E4%BD%BF%E7%94%A8/">样式使用</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E8%BF%9B%E9%98%B6/">React进阶</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E8%BF%9B%E9%98%B6/%E7%AE%80%E5%8D%95%E6%89%8B%E5%86%99Redux/">简单手写Redux</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/javaScript/">javaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/javaScript/javaScript%E8%BF%9B%E9%98%B6/">javaScript进阶</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/javaScript/javaScript%E8%BF%9B%E9%98%B6/%E5%AF%B9%E8%B1%A1%E6%B5%85%E5%B1%82%E6%AF%94%E8%BE%83/">对象浅层比较</a></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget-wrap wow fadeInRight">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget-wrap wow fadeInRight">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li></ul>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+                
+            </div>
+            <footer id="footer" class="wow fadeInUp">
+    <div style="width: 100%; overflow: hidden"><div class="footer-line"></div></div>
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+            <div>
+                <span class="icon-copyright"></span>
+                2020-2023
+                <span class="footer-info-sep"></span>
+                Alwayla
+            </div>
+            
+                <div>
+                    基于&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+                    Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+                </div>
+            
+            
+                <div>
+                    <span class="icon-brush"></span>
+                    4.1k
+                    &nbsp;|&nbsp;
+                    <span class="icon-coffee"></span>
+                    00:18
+                </div>
+            
+            
+                <div>
+                    <span class="icon-eye"></span>
+                    <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+                    &nbsp;|&nbsp;
+                    <span class="icon-user"></span>
+                    <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+                </div>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+        <nav id="mobile-nav">
+    <div class="sidebar-wrap">
+        <div class="sidebar-author">
+            <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="Alwayla" class="lazyload">
+            <div class="sidebar-author-name">Alwayla</div>
+            <div class="sidebar-description">万物皆变,唯变不变</div>
+        </div>
+        <div class="sidebar-state">
+            <div class="sidebar-state-article">
+                <div>文章</div>
+                <div class="sidebar-state-number">7</div>
+            </div>
+            <div class="sidebar-state-category">
+                <div>分类</div>
+                <div class="sidebar-state-number">11</div>
+            </div>
+            <div class="sidebar-state-tag">
+                <div>标签</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+        </div>
+        <div class="sidebar-social">
+            
+                <div class=icon-github>
+                    <a href=https://github.com/Alwayla itemprop="url" target="_blank"></a>
+                </div>
+            
+        </div>
+        <div class="sidebar-menu">
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">首页</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/archives"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">归档</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/about"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">关于</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/friend"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">友链</div>
+                </div>
+            
+        </div>
+    </div>
+</nav>
+
+        
+<script src="https://unpkg.com/jquery@3.7.0/dist/jquery.min.js"></script>
+
+
+<script src="https://unpkg.com/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://unpkg.com/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+    
+<script src="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+
+    
+<script src="https://unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class="site-search">
+        <div class="algolia-popup popup">
+            <div class="algolia-search">
+                <span class="algolia-search-input-icon"></span>
+                <div class="algolia-search-input" id="algolia-search-input"></div>
+            </div>
+
+            <div class="algolia-results">
+                <div id="algolia-stats"></div>
+                <div id="algolia-hits"></div>
+                <div id="algolia-pagination" class="algolia-pagination"></div>
+            </div>
+
+            <span class="popup-btn-close"></span>
+        </div>
+    </div>
+    <!-- hexo injector body_end start -->
+<script src="/js/insertHighlight.js"></script>
+<!-- hexo injector body_end end --></body>
+    </html>
+

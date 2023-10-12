@@ -1,0 +1,517 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-CN"
+            
+          
+    >
+    <head>
+    <meta charset="utf-8">
+    
+
+    
+
+    
+    <title>
+        简单手写Redux |
+        
+        Alwayla</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CUbuntu%20Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+    
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/v4-font-face.min.css">
+
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+    <meta name="description" content="新建文件MyRedux  123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263import utils from &quot;.&#x2F;utils&#x2F;utils&quot;const createStore &#x3D; functi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单手写Redux">
+<meta property="og:url" content="https://alwayla.github.io/2023/10/12/7.%E7%AE%80%E5%8D%95%E6%89%8B%E5%86%99redux/index.html">
+<meta property="og:site_name" content="Alwayla">
+<meta property="og:description" content="新建文件MyRedux  123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263import utils from &quot;.&#x2F;utils&#x2F;utils&quot;const createStore &#x3D; functi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-12T03:57:57.044Z">
+<meta property="article:modified_time" content="2023-10-12T03:47:15.297Z">
+<meta property="article:author" content="Alwayla">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" href="/atom.xml" title="Alwayla" type="application/atom+xml">
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/typeface-source-code-pro@1.1.13/index.css">
+
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+    
+    
+    
+    
+    
+<script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script>
+
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/wowjs@1.1.3/css/libs/animate.css">
+
+        
+<script src="https://unpkg.com/wowjs@1.1.3/dist/wow.min.js"></script>
+
+        <script>
+          new WOW({
+            offset: 0,
+            mobile: true,
+            live: false
+          }).init();
+        </script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+    
+<div id='loader'>
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="loading-taichi">
+      <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+      <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff6e6b" />
+      <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z" fill="#fd0d00" />
+      <path d="M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95" fill="#fd0d00" />
+    </svg>
+    </div>
+    <div class="loading-word">命运齿轮转动中...</div>
+  </div>
+</div>
+</div>
+
+<script>
+  const endLoading = function() {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loader').classList.add("loading");
+  }
+  window.addEventListener('load', endLoading);
+  document.getElementById('loader').addEventListener('click', endLoading);
+</script>
+
+
+    <div id="container">
+        <div id="wrap">
+            <header id="header">
+    
+        <img data-src="/images/banner.jpg" data-sizes="auto" alt="简单手写Redux" class="lazyload">
+    
+    <div id="header-outer" class="outer">
+        <div id="header-title" class="inner">
+            <div id="logo-wrap">
+                
+                    
+                    
+                        <a href="/" id="logo"><h1>简单手写Redux</h1></a>
+                    
+                
+            </div>
+            
+                
+                
+            
+        </div>
+        <div id="header-inner">
+            <nav id="main-nav">
+                <a id="main-nav-toggle" class="nav-icon"></a>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/">首页</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/archives">归档</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/about">关于</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/friend">友链</a>
+                    </span>
+                
+            </nav>
+            <nav id="sub-nav">
+                
+                    <a id="nav-rss-link" class="nav-icon" href="/atom.xml"
+                       title="RSS 订阅"></a>
+                
+                
+            </nav>
+            <div id="search-form-wrap">
+                <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://Alwayla.github.io"></form>
+            </div>
+        </div>
+    </div>
+</header>
+
+            <div id="content" class="outer">
+                <section id="main"><article id="post-7.简单手写redux" class="h-entry article article-type-post"
+         itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <div class="article-inner">
+        <div class="article-meta">
+            <div class="article-date wow slideInLeft">
+    <a href="/2023/10/12/7.%E7%AE%80%E5%8D%95%E6%89%8B%E5%86%99redux/" class="article-date-link">
+        <time datetime="2023-10-12T03:57:57.044Z"
+              itemprop="datePublished">2023-10-12</time>
+    </a>
+</div>
+
+            
+    <div class="article-category wow slideInLeft">
+        <a class="article-category-link" href="/categories/React/">React</a><a class="article-category-link" href="/categories/React/React%E8%BF%9B%E9%98%B6/">React进阶</a><a class="article-category-link" href="/categories/React/React%E8%BF%9B%E9%98%B6/%E7%AE%80%E5%8D%95%E6%89%8B%E5%86%99Redux/">简单手写Redux</a>
+    </div>
+
+
+        </div>
+        <div class="hr-line"></div>
+        
+
+        <div class="e-content article-entry" itemprop="articleBody">
+            
+                <ul>
+<li>新建文件MyRedux</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">import utils from <span class="string">&quot;./utils/utils&quot;</span></span><br><span class="line">const createStore = <span class="keyword">function</span> createStore(reducer)&#123;</span><br><span class="line">    <span class="keyword">if</span>(typeof reducer === <span class="string">&quot;function&quot;</span>) throw new Error(<span class="string">&quot;请传入函数&quot;</span>)</span><br><span class="line"> //    创建公共状态state 用于存放数据</span><br><span class="line"> //    创建事件池listeners 用于存放页面更新事件</span><br><span class="line">    <span class="built_in">let</span> state,listeners = []</span><br><span class="line">    </span><br><span class="line">    //获取公共状态(数据)</span><br><span class="line">    const getState =  <span class="keyword">function</span> <span class="function"><span class="title">getState</span></span>()&#123;</span><br><span class="line">        //返回所有的公共状态(数据)</span><br><span class="line">        <span class="built_in">return</span> state</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    //向事件池中加入让组件更新的方法</span><br><span class="line">    const subscribe = <span class="keyword">function</span> subscribe(listener)&#123;</span><br><span class="line">        <span class="keyword">if</span>(typeof listener === <span class="string">&quot;function&quot;</span>) throw new Error(<span class="string">&quot;请传入函数&quot;</span>)</span><br><span class="line">      // 判断事件池中是否有对应函数</span><br><span class="line">        <span class="keyword">if</span>(!listeners.includes(listener))&#123;</span><br><span class="line">            listeners.push(listener)</span><br><span class="line">        &#125;</span><br><span class="line">      // 返回一个从事件池中移除方法的函数</span><br><span class="line">        <span class="built_in">return</span> <span class="keyword">function</span> <span class="function"><span class="title">unsubscribe</span></span>()&#123;</span><br><span class="line">            //查找对应方法的索引</span><br><span class="line">           <span class="built_in">let</span> index = listeners.indexOf(listener)</span><br><span class="line">            //删除对应方法</span><br><span class="line">            listeners.splice(index,1)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    const dispatch = <span class="keyword">function</span> dispatch(action)&#123;</span><br><span class="line">        //规则校验</span><br><span class="line">      //  判断action是否是对象</span><br><span class="line">        <span class="keyword">if</span> (!utils.isPlainObject(action)) throw new TypeError(<span class="string">&quot;actins必须是普通对象&quot;</span>);</span><br><span class="line">        //判断action中<span class="built_in">type</span>不为undefined</span><br><span class="line">        <span class="keyword">if</span>(typeof action.type === <span class="string">&#x27;undefined&#x27;</span>) throw new Error(<span class="string">&quot;action.type不能为undefiend&quot;</span>)</span><br><span class="line">        // 将action传递给reducer</span><br><span class="line">        // 把reducer执行，传递：公共状态、行为对象；接收执行的返回值，替换公共状态；  </span><br><span class="line">         state = reducer(state,action)</span><br><span class="line">         </span><br><span class="line">        //执行替换公共数据后 数据发生变化通知页面更新</span><br><span class="line">        listeners.forEach(listener=&gt;&#123;</span><br><span class="line">            //依次执行事件池中的每一个方法</span><br><span class="line">            listener()</span><br><span class="line">        &#125;)</span><br><span class="line">        //返回action</span><br><span class="line">        <span class="built_in">return</span> action</span><br><span class="line">    &#125;</span><br><span class="line">    /* redux内部会默认进行一次dispatch派发，目的：给公共容器中的状态赋值初始值 */</span><br><span class="line">    //获取一个随机唯一值</span><br><span class="line">    const randomString = () =&gt; Math.random().toString(36).substring(7).<span class="built_in">split</span>(<span class="string">&#x27;&#x27;</span>).<span class="built_in">join</span>(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">    //    执行一次进行初始化</span><br><span class="line">    dispatch(&#123;</span><br><span class="line">//        es6方法</span><br><span class="line">        //type:Symbol()</span><br><span class="line">        //自定义唯一值</span><br><span class="line">        <span class="built_in">type</span>:<span class="string">&#x27;@@redux/INIT&#x27;</span>+ randomString</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        getState,</span><br><span class="line">        subscribe,</span><br><span class="line">        dispatch</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
+<li><p>store&#x2F;index</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import &#123;createStore&#125; from <span class="string">&quot;./MyRedux&quot;</span></span><br><span class="line"></span><br><span class="line">//初始化的数据</span><br><span class="line"><span class="built_in">let</span> initial = &#123;</span><br><span class="line">    num: 10,</span><br><span class="line">&#125;;</span><br><span class="line">//state 存储容器中的公共状态 最开始没有值的时候 初始化为initial</span><br><span class="line">//action 每一次基于dispatch派发的时候 传递进来的行为对象 要求必须具备<span class="built_in">type</span>属性 存储派发的行为标识</span><br><span class="line">//为了接下来操作中我们操作state 不能直接修改容器中的状态[要等到最后<span class="built_in">return</span>的时候] 我们需要克隆</span><br><span class="line">const reducer = <span class="keyword">function</span> reducer(state=initial,action)&#123;</span><br><span class="line">    //克隆一份</span><br><span class="line">    state = &#123;...state&#125;</span><br><span class="line">    switch(action.type)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;SET_NUM&#x27;</span>:</span><br><span class="line">           state.num++</span><br><span class="line">           <span class="built_in">break</span>;</span><br><span class="line">        default:</span><br><span class="line">           <span class="built_in">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    //return 中的内容 会全部替换为store中容器的信息状态</span><br><span class="line">    <span class="built_in">return</span> state</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const store = createStore(reducer)</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default store;</span><br></pre></td></tr></table></figure></li>
+<li><p>创建文件上下文文件 ThemeContext.js</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//import &#123;createContext&#125; from <span class="string">&quot;react&quot;</span></span><br><span class="line">//const ThemeContext = createContext()</span><br><span class="line">//export default ThemeContext</span><br><span class="line"></span><br><span class="line">import React from <span class="string">&quot;react&quot;</span></span><br><span class="line"><span class="built_in">export</span> default React.createContext()</span><br></pre></td></tr></table></figure></li>
+<li><p>入口文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import store from <span class="string">&quot;./page/store&quot;</span></span><br><span class="line">import ThemeContext from <span class="string">&quot;./ThemeContext&quot;</span></span><br><span class="line">//将store传递给后代</span><br><span class="line">&lt;ThemeContext.Provider value=&#123;&#123;store&#125;&#125;&gt;</span><br><span class="line">    &lt;App/&gt;</span><br><span class="line">&lt;/ThemeContext.Provider&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>1.获取值(函数组件)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import &#123;useContext&#125; from <span class="string">&quot;react&quot;</span></span><br><span class="line">import ThemeContext from <span class="string">&quot;./ThemeContext&quot;</span></span><br><span class="line">const Demo = <span class="keyword">function</span> <span class="function"><span class="title">Demo</span></span>()&#123;</span><br><span class="line">    <span class="built_in">let</span> &#123;store&#125; = useContext(ThemeContext)</span><br><span class="line">    //获取容器中的公共状态(数据)</span><br><span class="line">    <span class="built_in">let</span> &#123;num&#125; = store.getStore()</span><br><span class="line">     视图更新</span><br><span class="line">     需要使用subscribe 将让视图刷新的方法加入事件池 当容器Store中的数据改变后 会依次执行事件池中的方法 让视图更新</span><br><span class="line">      方法一</span><br><span class="line">&lt;!--      const [num,setNum] = useState(0); --&gt;</span><br><span class="line">&lt;!--      const optionUpdate = ()=&gt;&#123; --&gt;</span><br><span class="line">&lt;!--      // 数据发生变化会然视图重新渲染 --&gt;</span><br><span class="line">&lt;!--           setNum(num+1) --&gt;</span><br><span class="line">&lt;!--         &#125; --&gt;</span><br><span class="line">&lt;!--          useEffect(()=&gt;&#123; --&gt;</span><br><span class="line">&lt;!--           //传入让组件更新的方法 --&gt;</span><br><span class="line">&lt;!--           //将组件更新的方法放入store事件池中 --&gt;</span><br><span class="line">&lt;!--           //返回的unsubscribe方法执行 可以把刚才放入事件池中的方法移除 --&gt;</span><br><span class="line">&lt;!--          let unsubscribe =  store.subscribe(optionUpdate) --&gt;</span><br><span class="line">&lt;!--          //useEffect中的 返回函数会在组件释放的时候执行 会把上一次返回的函数执行 --&gt;</span><br><span class="line">&lt;!--          return ()=&gt;&#123; --&gt;</span><br><span class="line">&lt;!--              unsubscribe() --&gt;</span><br><span class="line">&lt;!--             &#125; --&gt;</span><br><span class="line">&lt;!--          &#125;,[num]) --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--     方法二 --&gt;</span><br><span class="line">    let [_, setNum] = useState(<span class="number">0</span>);</span><br><span class="line">    useEffect(()=&gt;&#123;</span><br><span class="line">        store.subscribe(()=&gt;&#123;</span><br><span class="line">            //在调用事件池中的方法时  每次放入不同的数据 </span><br><span class="line">            setNum(+new Date)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,[])</span><br><span class="line">   return &lt;&gt;</span><br><span class="line">       &lt;div&gt;&#123;num&#125;&lt;/div&gt;</span><br><span class="line">   &lt;/&gt;    </span><br><span class="line">&#125;</span><br><span class="line">export default Demo;</span><br></pre></td></tr></table></figure></li>
+<li><p>2.获取值(类组件)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import React,&#123;useContext&#125; from <span class="string">&quot;react&quot;</span></span><br><span class="line">import ThemeContext from <span class="string">&quot;./ThemeContext&quot;</span></span><br><span class="line">class Demo extends React.Component&#123;</span><br><span class="line">    static contextType = ThemeContext;</span><br><span class="line">    <span class="function"><span class="title">render</span></span>()&#123;</span><br><span class="line">        const &#123; store &#125; = this.context;</span><br><span class="line">        <span class="built_in">let</span> &#123; num &#125; = store.getState();</span><br><span class="line">        <span class="built_in">return</span> &lt;&gt;</span><br><span class="line">            &lt;div&gt;&#123;num&#125;&lt;/div&gt;</span><br><span class="line">        &lt;/&gt;</span><br><span class="line">        //需要让组件进行更新</span><br><span class="line">        <span class="function"><span class="title">componentDidMount</span></span>()&#123;</span><br><span class="line">            const &#123; store &#125; = this.context;</span><br><span class="line">            store.subscribe(()=&gt;&#123;</span><br><span class="line">                //将这个方法加入store的事件池 数据变化后进行视图重新渲染</span><br><span class="line">                this.forceUpdate()    </span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">&#125;</span><br><span class="line">export default Demo;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import &#123;useContext&#125; from <span class="string">&quot;react&quot;</span></span><br><span class="line">import ThemeContext from <span class="string">&quot;./ThemeContext&quot;</span></span><br><span class="line"></span><br><span class="line">const Demo = <span class="keyword">function</span> <span class="function"><span class="title">Demo</span></span>()&#123;</span><br><span class="line">    const &#123;store&#125; =  useContext(ThemeContext)</span><br><span class="line"> <span class="built_in">return</span> &lt;&gt;</span><br><span class="line">     &lt;div onClick=&#123;()=&gt;store.dispatch(&#123;<span class="built_in">type</span>:<span class="string">&quot;SET_NUM&quot;</span>&#125;)&#125;&gt;修改&lt;/div&gt;</span><br><span class="line"> &lt;/&gt;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">export</span> default Demo;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="https://alwayla.github.io/2023/10/12/7.%E7%AE%80%E5%8D%95%E6%89%8B%E5%86%99redux/" data-id="clnmtixmi000c7kn7eega1zua" data-title="简单手写Redux"
+               class="article-share-link">分享</a>
+            
+            
+            
+            
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+
+
+        </footer>
+    </div>
+    
+        
+    <nav id="article-nav" class="wow fadeInUp">
+        
+        
+            <div class="article-nav-link-wrap article-nav-link-right">
+                
+                    
+                    
+                        <img data-src="/covers/222.jfif" data-sizes="auto" alt="React中代理实现" class="lazyload">
+                    
+                
+                <a href="/2023/10/12/4.react%E4%B8%AD%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%90%86/"></a>
+                <div class="article-nav-caption">后一篇</div>
+                <h3 class="article-nav-title">
+                    
+                        React中代理实现
+                    
+                </h3>
+            </div>
+        
+    </nav>
+
+
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
+</section>
+                
+                    <aside id="sidebar">
+    <div class="sidebar-wrap wow fadeInRight">
+        <div class="sidebar-author">
+            <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="Alwayla" class="lazyload">
+            <div class="sidebar-author-name">Alwayla</div>
+            <div class="sidebar-description">万物皆变,唯变不变</div>
+        </div>
+        <div class="sidebar-state">
+            <div class="sidebar-state-article">
+                <div>文章</div>
+                <div class="sidebar-state-number">7</div>
+            </div>
+            <div class="sidebar-state-category">
+                <div>分类</div>
+                <div class="sidebar-state-number">11</div>
+            </div>
+            <div class="sidebar-state-tag">
+                <div>标签</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+        </div>
+        <div class="sidebar-social">
+            
+                <div class=icon-github>
+                    <a href=https://github.com/Alwayla itemprop="url" target="_blank"></a>
+                </div>
+            
+        </div>
+        <div class="sidebar-menu">
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">首页</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/archives"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">归档</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/about"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">关于</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/friend"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">友链</div>
+                </div>
+            
+        </div>
+    </div>
+    
+        
+    <div class="widget-wrap wow fadeInRight">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E5%9F%BA%E7%A1%80/">React基础</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E5%9F%BA%E7%A1%80/ref%E5%92%8CuseImperativeHandle/">ref和useImperativeHandle</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E5%9F%BA%E7%A1%80/%E4%B8%8A%E4%B8%8B%E6%96%87%E9%80%9A%E8%AE%AF/">上下文通讯</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E5%9F%BA%E7%A1%80/%E4%BB%A3%E7%90%86/">代理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E5%9F%BA%E7%A1%80/%E6%A0%B7%E5%BC%8F%E4%BD%BF%E7%94%A8/">样式使用</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E8%BF%9B%E9%98%B6/">React进阶</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/React/React%E8%BF%9B%E9%98%B6/%E7%AE%80%E5%8D%95%E6%89%8B%E5%86%99Redux/">简单手写Redux</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/javaScript/">javaScript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/javaScript/javaScript%E8%BF%9B%E9%98%B6/">javaScript进阶</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/javaScript/javaScript%E8%BF%9B%E9%98%B6/%E5%AF%B9%E8%B1%A1%E6%B5%85%E5%B1%82%E6%AF%94%E8%BE%83/">对象浅层比较</a></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget-wrap wow fadeInRight">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget-wrap wow fadeInRight">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li></ul>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+                
+            </div>
+            <footer id="footer" class="wow fadeInUp">
+    <div style="width: 100%; overflow: hidden"><div class="footer-line"></div></div>
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+            <div>
+                <span class="icon-copyright"></span>
+                2020-2023
+                <span class="footer-info-sep"></span>
+                Alwayla
+            </div>
+            
+                <div>
+                    基于&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+                    Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+                </div>
+            
+            
+                <div>
+                    <span class="icon-brush"></span>
+                    4.1k
+                    &nbsp;|&nbsp;
+                    <span class="icon-coffee"></span>
+                    00:18
+                </div>
+            
+            
+                <div>
+                    <span class="icon-eye"></span>
+                    <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+                    &nbsp;|&nbsp;
+                    <span class="icon-user"></span>
+                    <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+                </div>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+        <nav id="mobile-nav">
+    <div class="sidebar-wrap">
+        <div class="sidebar-author">
+            <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="Alwayla" class="lazyload">
+            <div class="sidebar-author-name">Alwayla</div>
+            <div class="sidebar-description">万物皆变,唯变不变</div>
+        </div>
+        <div class="sidebar-state">
+            <div class="sidebar-state-article">
+                <div>文章</div>
+                <div class="sidebar-state-number">7</div>
+            </div>
+            <div class="sidebar-state-category">
+                <div>分类</div>
+                <div class="sidebar-state-number">11</div>
+            </div>
+            <div class="sidebar-state-tag">
+                <div>标签</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+        </div>
+        <div class="sidebar-social">
+            
+                <div class=icon-github>
+                    <a href=https://github.com/Alwayla itemprop="url" target="_blank"></a>
+                </div>
+            
+        </div>
+        <div class="sidebar-menu">
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">首页</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/archives"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">归档</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/about"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">关于</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/friend"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">友链</div>
+                </div>
+            
+        </div>
+    </div>
+</nav>
+
+        
+<script src="https://unpkg.com/jquery@3.7.0/dist/jquery.min.js"></script>
+
+
+<script src="https://unpkg.com/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://unpkg.com/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+    
+<script src="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+
+    
+<script src="https://unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class="site-search">
+        <div class="algolia-popup popup">
+            <div class="algolia-search">
+                <span class="algolia-search-input-icon"></span>
+                <div class="algolia-search-input" id="algolia-search-input"></div>
+            </div>
+
+            <div class="algolia-results">
+                <div id="algolia-stats"></div>
+                <div id="algolia-hits"></div>
+                <div id="algolia-pagination" class="algolia-pagination"></div>
+            </div>
+
+            <span class="popup-btn-close"></span>
+        </div>
+    </div>
+    <!-- hexo injector body_end start -->
+<script src="/js/insertHighlight.js"></script>
+<!-- hexo injector body_end end --></body>
+    </html>
+
